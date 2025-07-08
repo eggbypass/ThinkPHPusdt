@@ -1,0 +1,77 @@
+{php}
+$template = get_config();
+
+{/php}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>{:empty($title) ? '' : $title . ' - '}{$site.shop_title}</title>
+    <meta name="Keywords" content="Store">
+    <meta name="Description" content="Store">
+    <link rel="stylesheet" type="text/css" href="/content/template/default/css/layui.css?v={$template_version}" />
+    <link rel="stylesheet" href="/content/template/default/css/main.css?v={$template_version}">
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-229646155-1">
+    </script>
+    {if condition="isset($page) && $page == 'index'"}
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+    
+      gtag('config', 'UA-229646155-1');
+    </script>
+    {/if}
+
+</head>
+<body>
+    <div class="header">
+        <div class="layui-row">
+            <div class="layui-col-md8 layui-col-md-offset2 layui-col-sm12">
+                <div class="header-box">
+                    <a href="/">
+                    <img src="{$template['logo']}" alt="">
+                    </a>
+                    <div class="query">
+                        <a href="/" class="layui-hide-xs">
+                            <i class="layui-icon layui-icon-home" style="font-size: 14px; font-weight: bold;"></i>
+                            <span>首页</span>
+                        </a>
+                         <a href="{:url('/order')}">
+                            <i class="layui-icon layui-icon-search"></i>
+                            <span>查看订单</span>
+                        </a>
+                        {if condition="$site.login == 1 && $uid == null"}
+                        <a href="{:url('/login')}">
+                            <i class="layui-icon layui-icon-username"></i>
+                            <span>登录</span>
+                        </a>
+                        {/if}
+                        {if condition="$uid"}
+                        <a href="{:url('/logout')}">
+                            <i class="layui-icon layui-icon-username"></i>
+                            <span>退出登录</span>
+                        </a>
+                        {/if}
+                        <a id="translate"></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="content">
+
+        {if condition="isset($page) && $page == 'index'"}
+        <div class="main">
+            <div class="layui-row">
+                <div class="layui-col-md8 layui-col-md-offset2 layui-col-sm12">
+                    <div class="main-box">
+                        {$template['notice']}
+                    </div>
+                </div>
+            </div>
+        </div>
+        {/if}

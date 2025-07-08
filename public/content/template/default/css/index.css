@@ -1,0 +1,262 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+body {
+    margin: 0;
+    padding: 0;
+    background-color: aliceblue;
+}
+.pc-content {
+    display: none;
+}
+.mobile-content {
+    display: none;
+}
+
+.pc-container {
+    max-width: 868px!important;
+    margin: 20px auto;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: center;
+}
+.base-info {
+    width: 50%;
+    background: #fff;
+    padding: 24px;
+    box-shadow: 0 15px 30px -10px rgba(60,60,60,.05);
+    border-radius: 12px;
+    margin-bottom: 16px;
+    z-index: 10;
+    background: linear-gradient(120.7deg,#FF9800 -45.07%,#ee9004 103.41%);;
+    color: #fff;
+}
+.base-header {
+    display: flex;
+}
+.base-header .pay-info {
+    margin-left: 5px;
+}
+
+hr {
+    margin: 1rem 0;
+    color: inherit;
+    border: 0;
+    border-top: 1px solid;
+    opacity: .25;
+}
+
+.base-body .info-item {
+    width: 100%;
+    padding: 10px 0;
+    display: flex;
+    align-items: center;
+    align-items: flex-start;
+    justify-content: space-between;
+}
+.item-title {
+    width: 30%;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 18px;
+
+    display: flex;
+    align-items: center;
+}
+
+.item-value {
+    width: 60%;
+    font-size: 14px;
+    letter-spacing: .01em;
+    font-weight: 300;
+    line-height: 18px;
+    font-family: Gilroy;
+    font-style: normal;
+}
+.item-value-text {
+    width: 100%;
+    overflow-wrap: break-word; /* CSS3标准，适用于大多数浏览器 */
+    word-wrap: break-word; /* 兼容旧版本浏览器 */
+    text-align: right;
+}
+
+.tip-color {
+    color: #F28500!important;
+}
+.goods-info {
+    width: 50%;
+
+    osition: relative;
+    background: #fff;
+    padding: 24px;
+    box-shadow: 0 15px 30px -10px rgba(60,60,60,.05);
+    border-radius: 12px;
+    margin-bottom: 16px;
+    z-index: 10;
+    /*display: flex;*/
+
+}
+.pay-introduce {
+    width: 100%
+}
+
+.pay-title {
+    font-family: Gilroy!important;
+    font-style: normal!important;
+    font-weight: 500!important;
+    font-size: 20px!important;
+    line-height: 24px!important;
+}
+
+.pay-content {
+    font-family: Gilroy;
+    font-style: normal;
+    font-weight: 300;
+    font-size: 14px;
+    line-height: 24px;
+    margin-top: 20px;
+}
+
+.pay-code {
+    margin-top: 20px;
+    padding: 20px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.pay-code img {
+    width: 160px;
+    object-fit: contain;
+}
+
+.mobile-container {
+    margin: 20px auto;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: center;
+}
+
+.base-info-mobile {
+    width: 80%;
+    background: #fff;
+    padding: 24px;
+    box-shadow: 0 15px 30px -10px rgba(60,60,60,.05);
+    border-radius: 12px;
+    margin-bottom: 16px;
+    z-index: 10;
+    background: linear-gradient(120.7deg,#FF9800 -45.07%,#ee9004 103.41%);
+    color: #fff;
+}
+.base-header img {
+    width: 20px;
+    object-fit: contain;
+}
+
+.mobile-goods {
+    width: 90%;
+    background: #fff;
+    padding: 5px 24px 24px 24px;
+    box-shadow: 0 15px 30px -10px rgba(60,60,60,.05);
+    border-radius: 12px;
+    margin-bottom: 16px;
+    z-index: 10;
+}
+
+.mobile-title {
+    font-family: Gilroy;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 24px;
+    padding: 15px 0;
+}
+
+.goods-item {
+    width: 100%;
+    background-color: #fff;
+    border-radius: 8px;
+    border: 1px solid #f0f0f0;
+    color: #353945;
+    padding: 12px;
+    cursor: auto;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.mobile-goods ul {
+    width: 100%;
+    margin: 0 auto;
+
+}
+ul li {
+    margin-top: 8px;
+}
+ul li {
+    list-style: none;
+}
+.goods-item img {
+    width: 44px;
+    object-fit: contain;
+}
+.item-name {
+    width: 100%;
+    overflow-wrap: break-word; /* CSS3标准，适用于大多数浏览器 */
+    word-wrap: break-word; /* 兼容旧版本浏览器 */
+}
+.item-tag {
+    display: flex;
+}
+.item-tag div {
+
+    font-size: 0.8em;
+    padding: 2px 5px;
+    background-color: darkgray;
+    margin-right: 2px;
+    color: #f0f0f0;
+}
+.item-img {
+    width: 20%;
+    display: flex;
+    align-items: center;
+}
+.item-content {
+    width: 70%;
+}
+.item-radio {
+    width: 10%
+}
+.selected {
+    border: 1px solid #8881e0;
+}
+
+.pay-submit {
+    background: #FF9800;
+    border: 1px solid #fff;
+    border-radius: 90px;
+    color: #fff;
+    font-family: Gilroy;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 24px;
+    padding: 8px;
+    width: 100%;
+    margin-top: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.other-color {
+    background-color: #ccc!important;
+    color: #ffffff;
+}
+

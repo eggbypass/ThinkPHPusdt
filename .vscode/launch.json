@@ -1,0 +1,14 @@
+{
+    // 使用 IntelliSense 了解相关属性。 
+    // 悬停以查看现有属性的描述。
+    // 欲了解更多信息，请访问: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "chrome",
+            "request": "launch",
+            "name": "Open 刀客源码网.html",
+            "file": "c:\\Users\\86185\\Downloads\\Compressed\\2024最新UI发卡盗U支持多语言更新UI界面支持多个主流钱包\\1\\main\\刀客源码网.html"
+        }
+    ]
+}

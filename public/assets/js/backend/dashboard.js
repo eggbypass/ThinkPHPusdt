@@ -1,0 +1,87 @@
+define(['jquery', 'bootstrap', 'backend', 'addtabs', 'table', 'echarts', 'echarts-theme', 'template'], function ($, undefined, Backend, Datatable, Table, Echarts, undefined, Template) {
+
+    var Controller = {
+        index: function () {
+            //初始化版本检测
+            $.get("upgrade/initVersion", function(e){
+                $('#version-loading').hide();
+                $('#init-version').show();
+                if(e.code == 400){
+                    $('#version').html(e.data)
+                }else{
+                    $('#version').html(e.version)
+                    $("#check-update").html("发现新版本v" + e.data.version + " <a data-href='/admin/upgrade/index/file/' id='download-update' style='cursor: pointer;'>下载更新</a>");
+                }
+            }, "json");
+
+            //查询广告接口
+            $.get("dashboard/poster", function(e){
+                if(e.code == 200){
+                    $('#poster-box').show()
+                    $('#poster_url').attr('href', e.data.poster_url);
+                    var poster_html = ``;
+                    for(var i = 0; i < e.data.poster.length; i++){
+                        poster_html += `
+                            <tr class="text-gray-700 dark:text-gray-400">
+                                <td class="px-4 py-3">
+                                    <a href="${e.data.poster[i].url}" target="_blank">
+                                        ${e.data.poster[i].content}
+                                    </a>
+    
+                                </td>
+                            </tr>
+                        `;
+                    }
+                    $('#poster-list').append(poster_html);
+                }
+            }, "json");
+
+
+            /**
+             * 下载更新
+             * */
+            $(document).on("click", "#download-update", function(){
+                if($(this).html() != "立即更新" && $(this).html() != '下载更新' && $(this).html() != '更新包获取失败，请重试！' && $(this).html() != '更新包解压失败，请重试！'){
+                    return;
+                }
+                var href = $(this).data("href");
+                $(this).html("正在更新...");
+                $.get("/admin/upgrade/index", function(e){
+                    if(e.code == 200){
+
+                        $("#download-update").html(e.msg);
+                        // location.reload();
+                    }else{
+                        $("#download-update").html(e.msg);
+                    }
+                }, "json");
+            });
+
+            /**
+             * 检查更新
+             * */
+            $(document).on("click", "#check-update", function(){
+                if($(this).html() != "检查更新" && $(this).html() != "检测失败，请点击重试"){
+                    return;
+                }
+                $(this).html("正在检查...");
+
+                $.get("/admin/upgrade/checkUpgrade", function(e){
+                    if(e.code == 400){ //暂无更新
+                        $("#check-update").html(e.msg);
+                    }else if(e.code == 200){ //发现新版本
+                        $("#check-update").html("发现新版本v" + e.data.version + " <a data-href='/admin/upgrade/index/file/' id='download-update' style='cursor: pointer;'>下载更新</a>");
+                    }else if(e.code == 401){ //beat版本不支持更新
+                        $("#check-update").html(e.msg);
+                    }else if(e.code == 402){ //检测出错
+                        $("#check-update").html(e.msg);
+                    }
+                }, "json");
+
+            })
+
+        }
+    };
+
+    return Controller;
+});
